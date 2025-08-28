@@ -1,3 +1,16 @@
+## 2025-08-28 - Release 4.5.0
+
+**Features**
+
+- [Addition of conninfo_options param to postgres class (#19)](https://github.com/deric/puppet-barman/pull/22)
+
+**Bugfixies**
+
+- [Pass barman_user to archive command (#20)](https://github.com/deric/puppet-barman/pull/21)
+- [Resolve key facts as root only](https://github.com/deric/puppet-barman/pull/18)
+
+[Full changes](https://github.com/deric/puppet-barman/compare/v4.4.1...v4.5.0)
+
 ## 2025-02-13 - Release 4.4.1
 
 **Features**
