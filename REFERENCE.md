@@ -857,6 +857,8 @@ Definition of the user used by Barman to connect to the
 Definition of the barman home directory. The default value
                   is set from the 'settings' class.
 Whether cron entry should be managed.
+Additional connection options passed to the conninfo string.
+                  The default value is undef.
 User to run cron jobs.
 Day of the month set in the cron for the backup schedule.
                   The default value (undef) ensure daily backups.
@@ -1050,6 +1052,7 @@ The following parameters are available in the `barman::postgres` class:
 * [`barman_dbuser`](#-barman--postgres--barman_dbuser)
 * [`barman_home`](#-barman--postgres--barman_home)
 * [`manage_cron`](#-barman--postgres--manage_cron)
+* [`conninfo_options`](#-barman--postgres--conninfo_options)
 * [`cron_user`](#-barman--postgres--cron_user)
 * [`backup_mday`](#-barman--postgres--backup_mday)
 * [`backup_wday`](#-barman--postgres--backup_wday)
@@ -1190,6 +1193,14 @@ Data type: `Boolean`
 
 
 Default value: `true`
+
+##### <a name="-barman--postgres--conninfo_options"></a>`conninfo_options`
+
+Data type: `Optional[String]`
+
+
+
+Default value: `undef`
 
 ##### <a name="-barman--postgres--cron_user"></a>`cron_user`
 
@@ -2481,7 +2492,7 @@ Default value: `$barman::custom_lines`
 
 Allowed backup age
 
-Alias of `Optional[Pattern[/^[1-9][0-9]* (DAY|WEEK|MONTH)S?$/]]`
+Alias of `Optional[Pattern[/^[1-9][0-9]* (HOUR|DAY|WEEK|MONTH)S?$/]]`
 
 ### <a name="Barman--BackupMethod"></a>`Barman::BackupMethod`
 
