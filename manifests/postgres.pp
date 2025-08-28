@@ -412,10 +412,17 @@ class barman::postgres (
     require => Class['postgresql::server'],
   }
 
+  $_connection = "user=${barman_dbuser} dbname=${barman_dbname} host=${server_address} port=${server_port}"
+
+  $_conninfo = $conninfo_options ? {
+    undef   => $_connection,
+    default => "${_connection} ${conninfo_options}",
+  }
+
   # Export resources to Barman server
   if $manage_barman_server {
     @@barman::server { $postgres_server_id:
-      conninfo                      => "user=${barman_dbuser} dbname=${barman_dbname} host=${server_address} port=${server_port} ${conninfo_options}",
+      conninfo                      => $_conninfo,
       ssh_command                   => "ssh -q ${postgres_user}@${server_address}",
       tag                           => "barman-${host_group}",
       archiver                      => $archiver,

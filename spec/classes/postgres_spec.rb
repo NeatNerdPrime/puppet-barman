@@ -22,9 +22,32 @@ describe 'barman::postgres' do
     let(:params) do
       {
         description: 'psql',
+        postgres_server_id: 'psql',
       }
     end
 
     it { is_expected.to compile.with_all_deps }
+    it {
+      expect(exported_resources).to contain_barman__server('psql').with(
+        conninfo: 'user=barman dbname=postgres host=foo.example.com port=5432',
+      )
+    }
+  end
+
+  context 'with conninfo' do
+    let(:params) do
+      {
+        conninfo_options: 'sslcert=postgresql.crt',
+        postgres_server_id: 'psql',
+      }
+    end
+
+    it { is_expected.to compile.with_all_deps }
+
+    it {
+      expect(exported_resources).to contain_barman__server('psql').with(
+        conninfo: 'user=barman dbname=postgres host=foo.example.com port=5432 sslcert=postgresql.crt',
+      )
+    }
   end
 end

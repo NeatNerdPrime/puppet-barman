@@ -58,6 +58,8 @@ describe 'barman' do
           )
         end
 
+        it { is_expected.to contain_class('Barman::Autoconfigure') }
+
         it {
           expect(exported_resources).to contain_ssh_authorized_key('postgres-test').with(
             user: 'postgres',
